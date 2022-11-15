@@ -13,7 +13,7 @@ export class FormService {
   }
 
   registerValidator() {
-    const forms = document.querySelectorAll("form");
+    const forms = document.querySelectorAll("[data-form]");
 
     forms.forEach((form) => {
       try {
