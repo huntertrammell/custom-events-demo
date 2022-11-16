@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const coreFetch = window.fetch;
 
   window.fetch = (input, init) => {
-    if (input === "/api/forms") {
+    if (input === "/api/test") {
       return new Promise((resolve) => {
         resolve({
           status: 200,
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
           json: () => Promise.resolve(JSON.parse(init.body)),
         });
       });
-    } else if (input === "/api/forms/error") {
+    } else if (input === "/api/test/error") {
       return new Promise((resolve) => {
         resolve({
           status: 500,
