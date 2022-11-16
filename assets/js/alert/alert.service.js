@@ -6,6 +6,7 @@ export class AlertService {
 
     document.addEventListener("alert:show", (e) => {
       this.populateAlert(e.detail);
+      setTimeout(() => this.populateAlert("", "", ""), 5000);
     });
   }
 
@@ -13,7 +14,5 @@ export class AlertService {
     this.alert.setAttribute("data-alert", type);
     this.alertTitle.textContent = title;
     this.alertBody.textContent = body;
-
-    setTimeout(() => this.populateAlert("", "", ""), 5000);
   }
 }
