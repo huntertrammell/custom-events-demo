@@ -50,14 +50,14 @@ export class FormInputValidation {
       input.dispatchEvent(
         new CustomEvent("input:error", {
           bubbles: true,
-          detail: { input, errorField },
+          detail: { errorField },
         })
       );
     } else {
       input.dispatchEvent(
         new CustomEvent("input:valid", {
           bubbles: true,
-          detail: { input, errorField },
+          detail: { errorField },
         })
       );
     }
@@ -67,8 +67,11 @@ export class FormInputValidation {
     this.submit.addEventListener("click", () => {
       this.validateForm();
       if (this.isFormValid) {
-        // handle form submission
-        console.log("submitted valid form");
+        this.form.dispatchEvent(
+          new CustomEvent("form:submit", {
+            bubbles: true,
+          })
+        );
       }
     });
   }

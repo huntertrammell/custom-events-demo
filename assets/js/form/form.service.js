@@ -1,5 +1,7 @@
 import { FormInputValidation } from "./validation.js";
 import { FormErrorHandler } from "./error.js";
+import { FormSubmitHandler } from "./submission.js";
+import { FormResetHandler } from "./reset.js";
 
 export class FormService {
   constructor() {
@@ -7,8 +9,19 @@ export class FormService {
 
     try {
       new FormErrorHandler();
+      new FormSubmitHandler();
+      new FormResetHandler();
     } catch (error) {
-      console.log(error);
+      document.dispatchEvent(
+        new CustomEvent("alert:show", {
+          bubbles: true,
+          detail: {
+            title: "Sorry, something went wrong.",
+            body: error.message,
+            type: "error",
+          },
+        })
+      );
     }
   }
 
@@ -19,7 +32,16 @@ export class FormService {
       try {
         new FormInputValidation(form);
       } catch (error) {
-        console.error(error);
+        document.dispatchEvent(
+          new CustomEvent("alert:show", {
+            bubbles: true,
+            detail: {
+              title: "Sorry, something went wrong.",
+              body: error.message,
+              type: "error",
+            },
+          })
+        );
       }
     });
   }
