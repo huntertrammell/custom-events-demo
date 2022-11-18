@@ -4,6 +4,20 @@ This is a simple a11y friendly form and alert service implementation that relies
 
 Live Demo: https://form-validation-service.netlify.app/
 
+## Installation
+
+```bash
+yarn install
+```
+
+```js
+yarn dev // Start dev server
+yarn build // Build for production
+yarn preview // Preview production build
+yarn test // Run tests
+yarn coverage // Generate coverage maps
+```
+
 ## Form Service
 
 - `data-form`: Added to the form element, the value passed in should be the endpoint the form should POST to.
