@@ -1,4 +1,12 @@
+import { catchError } from "../../utils/error";
+import { IFormData } from "../form.interface";
+
 export class FormSubmitHandler {
+  endpoint: string;
+  form: HTMLFormElement | null;
+  formData: FormData | IFormData | null;
+  isSubmissionProcessing: boolean;
+
   constructor() {
     this.endpoint = "";
     this.form = null;
@@ -10,8 +18,8 @@ export class FormSubmitHandler {
   registerSubmit() {
     document.addEventListener("form:submit", (e) => {
       if (!this.isSubmissionProcessing) {
-        this.form = e.target;
-        this.endpoint = e.target.getAttribute("data-form");
+        this.form = e.target as HTMLFormElement;
+        this.endpoint = (e.target as HTMLFormElement).getAttribute("data-form") as string;
         this.formData = Object.fromEntries(new FormData(this.form));
         this.handleSubmission();
       }
@@ -32,7 +40,7 @@ export class FormSubmitHandler {
       if (!response.ok) {
         // trigger error notification
         this.isSubmissionProcessing = false;
-        this.form.dispatchEvent(
+        this.form?.dispatchEvent(
           new CustomEvent("alert:show", {
             bubbles: true,
             detail: {
@@ -48,7 +56,7 @@ export class FormSubmitHandler {
       const data = await response.json();
       console.log("data: ", data);
 
-      this.form.dispatchEvent(
+      this.form?.dispatchEvent(
         new CustomEvent("alert:show", {
           bubbles: true,
           detail: {
@@ -59,19 +67,19 @@ export class FormSubmitHandler {
         })
       );
 
-      this.form.dispatchEvent(
+      this.form?.dispatchEvent(
         new CustomEvent("form:reset", {
           bubbles: true,
         })
       );
       this.isSubmissionProcessing = false;
     } catch (error) {
-      this.form.dispatchEvent(
+      this.form?.dispatchEvent(
         new CustomEvent("alert:show", {
           bubbles: true,
           detail: {
             title: "Sorry, something went wrong.",
-            body: error.message,
+            body: catchError(error),
             type: "error",
           },
         })

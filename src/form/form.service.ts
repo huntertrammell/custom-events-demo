@@ -1,7 +1,8 @@
-import { FormInputValidation } from "./validation.js";
-import { FormErrorHandler } from "./error.js";
-import { FormSubmitHandler } from "./submission.js";
-import { FormResetHandler } from "./reset.js";
+import { FormInputValidation } from "./utils/validation";
+import { FormErrorHandler } from "./utils/error";
+import { FormSubmitHandler } from "./utils/submission";
+import { FormResetHandler } from "./utils/reset";
+import { catchError } from "../utils/error";
 
 export class FormService {
   constructor() {
@@ -17,7 +18,7 @@ export class FormService {
           bubbles: true,
           detail: {
             title: "Sorry, something went wrong.",
-            body: error.message,
+            body: catchError(error),
             type: "error",
           },
         })
@@ -26,7 +27,7 @@ export class FormService {
   }
 
   registerValidator() {
-    const forms = document.querySelectorAll("[data-form]");
+    const forms = document.querySelectorAll("[data-form]") as NodeListOf<HTMLFormElement>;
 
     forms.forEach((form) => {
       try {
@@ -37,7 +38,7 @@ export class FormService {
             bubbles: true,
             detail: {
               title: "Sorry, something went wrong.",
-              body: error.message,
+              body: catchError(error),
               type: "error",
             },
           })

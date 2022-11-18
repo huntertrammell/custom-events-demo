@@ -1,0 +1,41 @@
+{
+  "name": "custom-events-demo",
+  "version": "1.0.0",
+  "description": "This is a simple a11y friendly form and alert service implementation that relies on custom events to trigger error states. This service was built to support multiple forms on the same page. The alert markup is reused and reset after each event.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open --hot",
+    "build": "webpack --mod=production && NODE_ENV=production",
+    "build:dev": "webpack --mode=development",
+    "build:prod": "webpack --mode=production && NODE_ENV=production",
+    "watch": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huntertrammell/custom-events-demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huntertrammell/custom-events-demo/issues"
+  },
+  "homepage": "https://github.com/huntertrammell/custom-events-demo#readme",
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "autoprefixer": "^10.4.13",
+    "css-loader": "^6.7.2",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.0",
+    "postcss": "^8.4.19",
+    "postcss-loader": "^7.0.1",
+    "style-loader": "^3.3.1",
+    "tailwindcss": "^3.2.4",
+    "ts-loader": "^9.4.1",
+    "typescript": "^4.9.3",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1"
+  }
+}

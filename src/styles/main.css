@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+[aria-hidden="true"] {
+  display: none;
+}
+
+[aria-disabled="true"] {
+  background-color: gray !important;
+}
+
+[data-alert] {
+  display: none;
+}
+
+[data-alert="success"] {
+  display: block;
+  color: rgb(19, 78, 74);
+  background-color: rgb(204, 251, 241);
+  border-color: rgb(20, 184, 166);
+}
+
+[data-alert="success"] svg {
+  color: rgb(20, 184, 166);
+}
+
+[data-alert="error"] {
+  display: block;
+  color: rgb(127, 29, 29);
+  background-color: rgb(254, 226, 226);
+  border-color: rgb(239, 68, 68);
+}
+
+[data-alert="error"] svg {
+  color: rgb(185, 28, 28);
+}
