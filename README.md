@@ -2,6 +2,8 @@
 
 This is a simple a11y friendly form and alert service implementation that relies on custom events to trigger error states. This service was built to support multiple forms on the same page. The alert markup is reused and reset after each event. 
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3d456b24-70c3-44d5-b44f-6c4ab2cd8551/deploy-status)](https://app.netlify.com/sites/form-validation-service/deploys)
+
 Live Demo: https://form-validation-service.netlify.app/
 
 ## Installation
