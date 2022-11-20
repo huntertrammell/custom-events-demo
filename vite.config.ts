@@ -9,7 +9,7 @@ export default defineConfig({
       all: true,
       exclude: ["*.js"],
     },
-    environment: "happy-dom",
+    environment: "jsdom",
     includeSource: ["**/*.ts"],
   },
 });
