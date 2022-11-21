@@ -7,7 +7,9 @@ export class FormInputValidation {
   constructor(form: HTMLFormElement) {
     this.form = form;
     this.inputs = this.form.querySelectorAll("[data-form-field]");
-    this.submit = this.form.querySelector("[data-form-submit]") as HTMLButtonElement;
+    this.submit = this.form.querySelector(
+      "[data-form-submit]"
+    ) as HTMLButtonElement;
     this.isFormValid = false;
     this.registerForm();
     this.registerInputs();
@@ -39,13 +41,15 @@ export class FormInputValidation {
 
   registerInputs() {
     this.inputs.forEach((input) => {
-      const errorField = document.getElementById(`${input.id}-error`) as HTMLElement;
+      const errorField = document.getElementById(
+        `${input.id}-error`
+      ) as HTMLElement;
 
       input.addEventListener("input", ({ target }) => {
-        this.validateInput((target as HTMLInputElement), errorField);
+        this.validateInput(target as HTMLInputElement, errorField);
       });
       input.addEventListener("blur", ({ target }) => {
-        this.validateInput((target as HTMLInputElement), errorField);
+        this.validateInput(target as HTMLInputElement, errorField);
       });
     });
   }
@@ -77,6 +81,8 @@ export class FormInputValidation {
             bubbles: true,
           })
         );
+      } else {
+        return;
       }
     });
   }

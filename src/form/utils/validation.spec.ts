@@ -1,5 +1,7 @@
 import { FormInputValidation } from "./validation";
 import { vi } from "vitest";
+import { FormErrorHandler } from "./error";
+import { FormSubmitHandler } from "./submission";
 
 describe("validation.ts", () => {
   beforeEach(() => {
@@ -52,6 +54,75 @@ describe("validation.ts", () => {
 
       expect(service.isFormValid).toBe(true);
       expect(button?.ariaDisabled).toBe("false");
+    });
+
+    it("should validate input on input", () => {
+      const form = document.querySelector("[data-form]") as HTMLFormElement;
+      const service = new FormInputValidation(form);
+      const errorService = new FormErrorHandler();
+      const errorSpy = vi.spyOn(errorService, "resetInputErrorState");
+      const input = document.querySelector(
+        "[data-form-field]"
+      ) as HTMLInputElement;
+
+      input.value = "hello world";
+
+      service.registerInputs();
+
+      input.dispatchEvent(new Event("input"));
+
+      expect(errorSpy).toBeCalled();
+    });
+
+    it("should validate input on blur", () => {
+      const form = document.querySelector("[data-form]") as HTMLFormElement;
+      const service = new FormInputValidation(form);
+      const errorService = new FormErrorHandler();
+      const errorSpy = vi.spyOn(errorService, "applyInputErrorState");
+      const input = document.querySelector(
+        "[data-form-field]"
+      ) as HTMLInputElement;
+
+      service.registerInputs();
+
+      input.dispatchEvent(new Event("blur"));
+
+      expect(errorSpy).toBeCalled();
+    });
+
+    it("should trigger form validation when form submit is clicked", () => {
+      const form = document.querySelector("[data-form]") as HTMLFormElement;
+      const service = new FormInputValidation(form);
+      const submitService = new FormSubmitHandler();
+      const submitSpy = vi.spyOn(submitService, "handleSubmission");
+      const input = document.querySelector(
+        "[data-form-field]"
+      ) as HTMLInputElement;
+      const button = document.querySelector(
+        "[data-form-submit]"
+      ) as HTMLButtonElement;
+
+      input.value = "hello world";
+
+      service.handleSubmit();
+      button.dispatchEvent(new Event("click"));
+
+      expect(submitSpy).toBeCalled();
+    });
+
+    it("should trigger form validation when form submit is clicked", () => {
+      const form = document.querySelector("[data-form]") as HTMLFormElement;
+      const service = new FormInputValidation(form);
+      const submitService = new FormSubmitHandler();
+      const submitSpy = vi.spyOn(submitService, "handleSubmission");
+      const button = document.querySelector(
+        "[data-form-submit]"
+      ) as HTMLButtonElement;
+
+      service.handleSubmit();
+      button.dispatchEvent(new Event("click"));
+
+      expect(submitSpy).not.toBeCalled();
     });
   });
 
